@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:background="@color/nhs_color">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_profile_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/no_profile_pic"
+                app:civ_border_width="2dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_welcome_msg"
+                android:layout_below="@+id/user_profile_image"
+                android:hint="Loading..."
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/show_nhs_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="-46dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@+id/show_welcome_msg"
+                android:hint="Loading..."
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_margin="15dp"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_profile"
+                android:background="@drawable/ic_outline_person"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_full_name"
+                android:layout_alignStart="@+id/ic_profile"
+                android:hint="Loading"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_full_name"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_fullName"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_sex"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_fullName"
+                android:background="@drawable/gender_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_sex"
+                android:layout_alignStart="@+id/ic_sex"
+                android:hint="Loading"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_fullName"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_sex"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_sex"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_email"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_sex"
+                android:background="@drawable/ic_outline_email_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_email"
+                android:layout_alignStart="@+id/ic_email"
+                android:hint="Loading"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_sex"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_email"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_email"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_mobile"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_email"
+                android:background="@drawable/ic_outline_mobile"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_mobile"
+                android:layout_alignStart="@+id/ic_mobile"
+                android:hint="Loading"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_email"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_mobile"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_mobile"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_DoB"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_mobile"
+                android:background="@drawable/ic_baseline_date_range"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_DoB"
+                android:layout_alignStart="@+id/ic_DoB"
+                android:hint="Loading"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_mobile"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_DoB"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_DoB"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_nationality"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_DoB"
+                android:background="@drawable/globe"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_nationality"
+                android:layout_alignStart="@+id/ic_nationality"
+                android:hint="Loading"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_DoB"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_nationality"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_nationality"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_postcode"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_nationality"
+                android:background="@drawable/ic_baseline_location_on_24"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_postcode"
+                android:layout_alignStart="@+id/ic_postcode"
+                android:hint="Loading"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_nationality"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_postcode"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_postcode"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/ic_resi_address"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_postcode"
+                android:background="@drawable/ic_baseline_home_work"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_resi_address"
+                android:layout_alignStart="@+id/ic_resi_address"
+                android:hint="Loading"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/divider_postcode"
+                android:layout_marginStart="50dp"
+                android:textSize="18sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/show_resi_address"
+                android:background="@color/nhs_color"
+                android:id="@+id/divider_resi_address"/>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:elevation="10dp"
+                android:visibility="gone"
+                android:id="@+id/userProgressBar"
+                 />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

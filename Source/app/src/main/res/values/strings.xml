@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">NHSDemo</string>
+    <string name="login_text">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="pasword">Pasword</string>
+    <string name="password_button">Password</string>
+    <string name="email_input">Email</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="firstname_text">Firstname</string>
+    <string name="lastname_text">Lastname</string>
+    <string name="email_address_text">Email Address</string>
+    <string name="choose_password">Choose Password</string>
+    <string name="confrim_password">Confirm Password</string>
+    <string name="mobile_text">Mobile</string>
+    <string name="postcode_text">Postcode</string>
+    <string name="residential_address">Residential Address</string>
+    <string name="nhs_number">NHS Number</string>
+    <string name="date_text">Date</string>
+    <string name="create_account_header">Create Account</string>
+    <string name="have_account">Already Have an Account? Login</string>
+    <string name="loginNow">Login</string>
+    <string name="date_of_birth">DOB</string>
+    <string name="gender_txt">Gender</string>
+    <string name="registered_email_txt">Registered Email:</string>
+    <string name="upload_picture_txt">Upload picture</string>
+    <string name="select_image_txt">Select Image</string>
+    <string name="family_voice_questions">Family Voice Questions</string>
+    <string name="header_sub_text">Please answer the following questions \nin the best of your ability.</string>
+    <string name="number_txt">1</string>
+    <string name="question_1">Today my relative or friend seems to be in pain:</string>
+    <string name="answer_1">All of the time</string>
+    <string name="answer_2">Most of the time</string>
+    <string name="answer_3">Some of the time</string>
+    <string name="answer_4">None of the time</string>
+    <string name="answer_5">Don\'t know</string>
+    <string name="next_txt">Next</string>
+    <string name="previous_txt">Previous</string>
+    <string name="submit_txt">Submit</string>
+    <string name="survey_demo">survey</string>
+    <string name="responses_txt">Responses</string>
+
+
+</resources>

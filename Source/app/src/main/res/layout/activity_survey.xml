@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SurveyActivity">
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/family_voice_questions"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/survey_logo"
+        android:layout_width="57dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/header_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toEndOf="@+id/header_title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/new_logo"
+        android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/header_sub_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/header_sub_text"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/header_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/header_title"
+        app:layout_constraintTop_toBottomOf="@+id/header_title" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="4dp"
+        android:background="@color/black"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="88dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_sub_txt"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="55dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/question_1"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:padding="20dp"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/black"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/number_cardView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:elevation="25dp"
+        app:cardCornerRadius="50dp"
+        android:background="@drawable/answer_button"
+        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        app:layout_constraintEnd_toStartOf="@+id/emoji_cardView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView5"
+        app:layout_constraintVertical_bias="0.7">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/number_txt"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="-29dp"
+        tools:layout_editor_absoluteY="16dp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/emoji_cardView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:elevation="25dp"
+        app:cardCornerRadius="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView5"
+        app:layout_constraintVertical_bias="0.642">
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/answer1_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/answer_button"
+        android:text="@string/answer_1"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/cardView5"
+        app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/answer2_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/answer_button"
+        android:text="@string/answer_2"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/cardView5"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/answer1_btn"
+        app:layout_constraintTop_toBottomOf="@id/cardView5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/answer3_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/answer_button"
+        android:text="@string/answer_3"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/answer1_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/answer1_btn"
+        app:layout_constraintTop_toBottomOf="@+id/answer1_btn" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/answer4_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/answer_button"
+        android:text="@string/answer_4"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/answer2_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/answer2_btn"
+        app:layout_constraintTop_toBottomOf="@+id/answer2_btn" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/answer5_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/answer_button"
+        android:text="@string/answer_5"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/answer3_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/answer3_btn"
+        app:layout_constraintTop_toBottomOf="@+id/answer3_btn" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/next_constraintLayout"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/register_button_background"
+        app:layout_constraintEnd_toEndOf="@+id/answer4_btn"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toStartOf="@+id/answer4_btn"
+        app:layout_constraintTop_toBottomOf="@+id/answer4_btn">
+
+        <TextView
+            android:id="@+id/next_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next_txt"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.298"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/right_arrow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="arrow_right_anim.json"
+            app:lottie_loop="true" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/prev_constraintLayout"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/register_button_background"
+        app:layout_constraintEnd_toEndOf="@+id/answer5_btn"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="@+id/answer5_btn"
+        app:layout_constraintTop_toBottomOf="@+id/answer5_btn">
+
+        <TextView
+            android:id="@+id/prev_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/previous_txt"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.777"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/left_arrow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="108dp"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="arrow_left_anim.json"
+            app:lottie_loop="true" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submit_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_background"
+        android:text="@string/submit_txt"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/next_constraintLayout"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/prev_constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/next_constraintLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

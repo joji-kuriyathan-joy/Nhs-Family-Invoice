@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_countries">Countries
+        <item>England</item>
+        <item>Scotland</item>
+        <item>Wales</item>
+        <item>Northern Ireland</item>
+    </string-array>
+</resources>
