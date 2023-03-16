@@ -90,8 +90,10 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final String emailTxt = email.getText().toString().trim();
                 final String passwordTxt = password.getText().toString().trim();
+
 
                 if (emailTxt.isEmpty() || passwordTxt.isEmpty()){
                     Toast.makeText(LoginActivity.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
@@ -123,7 +125,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(LoginActivity.this, UserActivity.class));
+
+                    //ByPassing this activity to Survey Activity
+                    startActivity(new Intent(LoginActivity.this, SurveyActivity.class));
+                    //startActivity(new Intent(LoginActivity.this, UserActivity.class));
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                 } else {

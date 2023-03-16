@@ -1,3 +1,8 @@
+buildscript {
+    dependencies {
+        classpath 'com.google.gms:google-services:4.3.10'
+    }
+}
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
@@ -32,8 +37,12 @@ android {
 //        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
 //    }
 }
+// 14-March-2023
+//dev_joji
+//Add this below line of code to avoid Kotlin kind of errors
+task prepareKotlinBuildScriptModel {
 
-
+}
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'

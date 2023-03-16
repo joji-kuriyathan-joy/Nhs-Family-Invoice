@@ -13,6 +13,7 @@ import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -97,6 +98,12 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseUser = auth.getCurrentUser();
         firebaseUser = auth.getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference("DisplayPics");
+        if(firebaseUser != null){
+            Log.d("Checking User","User Present");
+        }
+        else{
+            Log.d("Checking User","User Not Present");
+        }
 
         Uri uri = firebaseUser.getPhotoUrl();
 
