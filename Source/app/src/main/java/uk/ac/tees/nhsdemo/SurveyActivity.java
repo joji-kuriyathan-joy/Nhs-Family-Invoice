@@ -4,17 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.widget.Button;
 
@@ -31,7 +29,7 @@ import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import uk.ac.tees.nhsdemo.model.UserResponse;
+import uk.ac.tees.nhsdemo.model.SurveyData;
 
 public class SurveyActivity extends AppCompatActivity {
     private FirebaseAuth authProfile;
@@ -106,7 +104,7 @@ public class SurveyActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(SurveyActivity.this, "Something went wrong!", Toast.LENGTH_LONG).show();
+                Toast.makeText(SurveyActivity.this, "Something went wrong! Firebase Data not accessible", Toast.LENGTH_LONG).show();
             }
         });
         //------- Navigation button events -------
@@ -235,19 +233,33 @@ public class SurveyActivity extends AppCompatActivity {
                         }
                     }
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                    String currentDateAndTimeStr = sdf.format(new Date());
+                    Date date = new Date();
+                    String currentDateAndTimeStr = sdf.format(date);
+                    String dayOfTheWeek = (String) DateFormat.format("EEEE", date); // Thursday
+                    String day          = (String) DateFormat.format("dd",   date); // 20
+                    String monthString  = (String) DateFormat.format("MMM",  date); // Jun
+                    String year         = (String) DateFormat.format("yyyy", date); // 2013
                     Log.d("SurveyActivity", "Current Date Time : "+currentDateAndTimeStr);
-                    UserResponse userResponse = new UserResponse(userResponseToQuestionHashMap,
-                            firebaseUserEmail);
+                    SurveyData surveyData = new SurveyData(userResponseToQuestionHashMap,
+                            firebaseUserEmail,dayOfTheWeek,monthString,year,day);
                     //Store the details in the Response db
                     // Get reference to Firebase Realtime Database [User_Responses] node
                     mDatabaseUserResponseRef = FirebaseDatabase.getInstance().getReference("User_Responses");
 
-                    mDatabaseUserResponseRef.child(firebaseUser.getUid()).child(currentDateAndTimeStr).setValue(userResponse).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    mDatabaseUserResponseRef.child(firebaseUser.getUid()).child(currentDateAndTimeStr)
+                            .setValue(surveyData).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Toast.makeText(SurveyActivity.this,
                                     "Survey successfully completed!", Toast.LENGTH_LONG).show();
+                            // Open user profile after each successful registration
+                            Intent intent = new Intent(SurveyActivity.this, ResponseActivity.class);
+
+                            // To prevent user from returning to register activity on pressing back button after registration
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

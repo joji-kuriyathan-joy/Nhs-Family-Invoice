@@ -40,6 +40,11 @@
     <string name="submit_txt">Submit</string>
     <string name="survey_demo">survey</string>
     <string name="responses_txt">Responses</string>
+    <string name="response_day_txt">Mon</string>
+    <string name="response_date_txt">15</string>
+    <string name="response_month_txt">Jan</string>
+
+
 
 
 </resources>

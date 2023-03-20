@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="nhs_color">#005EB8</color>
+    <color name="responseLLbg">#5EADEC</color>
+    <color name="responseday_monthbg">#2979FF</color>
+    <color name="responsedatebg">#5292FD</color>
+
 </resources>
