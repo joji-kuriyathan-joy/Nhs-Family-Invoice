@@ -3,8 +3,11 @@ package uk.ac.tees.nhsdemo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -24,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.text.SimpleDateFormat;
@@ -42,8 +46,8 @@ public class SurveyActivity extends AppCompatActivity {
     private Button allOfTheTimeBtn, mostOfTheTimeBtn, someOfTheTimeBtn,
             noneOfTheTimeBtn, dontKnowBtn, submitBtn;
     private ConstraintLayout prevConstraintLayout, nextConstraintLayout;
-    private HashMap<Integer, String> questionsMap = new HashMap<>();
-    private HashMap<String, String> respondsToQuestionMap = new HashMap<>();
+    private final HashMap<Integer, String> questionsMap = new HashMap<>();
+    private final HashMap<String, String> respondsToQuestionMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +133,7 @@ public class SurveyActivity extends AppCompatActivity {
                     questionTextView.setText(questionsMap.get(Integer.valueOf(currentQuestionNumber) - 1));
                     questionNumberTextView.setText(String.valueOf(Integer.valueOf(currentQuestionNumber) - 1));
                 }
-
+                setSelectedAnswerBackgroundChange(getResponseForPreviousQuestion((String) questionTextView.getText()),v);
             }
         });
 
@@ -137,6 +141,15 @@ public class SurveyActivity extends AppCompatActivity {
         nextQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Make all Answer buttons background color default
+                allOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+                mostOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+                someOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+                noneOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+                dontKnowBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+
+
                 //check if user has responded to previous question
                 boolean hasResponded = checkUserResponseToPreviousQuestion((String) questionTextView.getText());
                 if (hasResponded) {
@@ -157,6 +170,7 @@ public class SurveyActivity extends AppCompatActivity {
                         questionTextView.setText(questionsMap.get(Integer.valueOf(currentQuestionNumber) + 1));
                         questionNumberTextView.setText(String.valueOf(Integer.valueOf(currentQuestionNumber) + 1));
                     }
+                    setSelectedAnswerBackgroundChange(getResponseForPreviousQuestion((String) questionTextView.getText()),v);
                 } else {
                     Toast.makeText(SurveyActivity.this,
                             "Please choose any one response for this question.", Toast.LENGTH_LONG).show();
@@ -172,6 +186,7 @@ public class SurveyActivity extends AppCompatActivity {
                 String allOfTheTimeStr = getString(R.string.answer_1);
                 Log.d("SurveyActivity", allOfTheTimeStr);
                 setResponseToQuestions(allOfTheTimeStr, (String) questionTextView.getText());
+                setSelectedAnswerBackgroundChange(allOfTheTimeStr,v);
             }
         });
         mostOfTheTimeBtn.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +195,7 @@ public class SurveyActivity extends AppCompatActivity {
                 String mostOfTheTimeStr = getString(R.string.answer_2);
                 Log.d("SurveyActivity", mostOfTheTimeStr);
                 setResponseToQuestions(mostOfTheTimeStr, (String) questionTextView.getText());
-
+                setSelectedAnswerBackgroundChange(mostOfTheTimeStr,v);
             }
         });
         someOfTheTimeBtn.setOnClickListener(new View.OnClickListener() {
@@ -189,7 +204,7 @@ public class SurveyActivity extends AppCompatActivity {
                 String someOfTheTimeStr = getString(R.string.answer_3);
                 Log.d("SurveyActivity", someOfTheTimeStr);
                 setResponseToQuestions(someOfTheTimeStr, (String) questionTextView.getText());
-
+                setSelectedAnswerBackgroundChange(someOfTheTimeStr,v);
             }
         });
         noneOfTheTimeBtn.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +213,7 @@ public class SurveyActivity extends AppCompatActivity {
                 String noneOfTheTimeStr = getString(R.string.answer_4);
                 Log.d("SurveyActivity", noneOfTheTimeStr);
                 setResponseToQuestions(noneOfTheTimeStr, (String) questionTextView.getText());
-
+                setSelectedAnswerBackgroundChange(noneOfTheTimeStr,v);
             }
         });
         dontKnowBtn.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +222,7 @@ public class SurveyActivity extends AppCompatActivity {
                 String dontKnowStr = getString(R.string.answer_5);
                 Log.d("SurveyActivity", dontKnowStr);
                 setResponseToQuestions(dontKnowStr, (String) questionTextView.getText());
+                setSelectedAnswerBackgroundChange(dontKnowStr,v);
 
             }
         });
@@ -279,11 +295,16 @@ public class SurveyActivity extends AppCompatActivity {
 
     //**function to check if user has choose any response to current question before going next question
     private boolean checkUserResponseToPreviousQuestion(String currentQuestion) {
-        boolean hasResponded = false;
-        if (respondsToQuestionMap.containsKey(currentQuestion.trim())) {
-            hasResponded = true;
-        }
+        boolean hasResponded = respondsToQuestionMap.containsKey(currentQuestion.trim());
         return hasResponded;
+    }
+
+    private String getResponseForPreviousQuestion(String prevQuestion){
+        String prev_response = "";
+        if(respondsToQuestionMap.containsKey(prevQuestion)){
+            prev_response = respondsToQuestionMap.get(prevQuestion);
+        }
+        return prev_response;
     }
 
     //This is a generic method that attaches respond to the current question.
@@ -304,4 +325,41 @@ public class SurveyActivity extends AppCompatActivity {
         }
     }
 
+    private void setSelectedAnswerBackgroundChange(String selectedAnsweStr,View v){
+        if(selectedAnsweStr.equalsIgnoreCase(getString(R.string.answer_1))){
+            allOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button_selected));
+            mostOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            someOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            noneOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            dontKnowBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+
+        }
+        else if(selectedAnsweStr.equalsIgnoreCase(getString(R.string.answer_2))){
+            allOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            mostOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button_selected));
+            someOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            noneOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            dontKnowBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+        }
+        else if(selectedAnsweStr.equalsIgnoreCase(getString(R.string.answer_3))){
+            allOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            mostOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            someOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button_selected));
+            noneOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            dontKnowBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+
+        }else if(selectedAnsweStr.equalsIgnoreCase(getString(R.string.answer_4))){
+            allOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            mostOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            someOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            noneOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button_selected));
+            dontKnowBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+        }else if(selectedAnsweStr.equalsIgnoreCase(getString(R.string.answer_5))){
+            allOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            mostOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            someOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            noneOfTheTimeBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button));
+            dontKnowBtn.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.answer_button_selected));
+        }
+    }
 }
