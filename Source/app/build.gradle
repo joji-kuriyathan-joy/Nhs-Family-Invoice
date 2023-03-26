@@ -43,6 +43,11 @@ android {
 task prepareKotlinBuildScriptModel {
 
 }
+//Wrapper Error Issue
+//Task 'wrapper' not found in project ':app'.
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
