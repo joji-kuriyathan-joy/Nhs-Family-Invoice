@@ -1,5 +1,7 @@
 package uk.ac.tees.nhsdemo;
 
+import static com.google.common.io.Files.getFileExtension;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,6 @@ import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -30,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,12 +50,15 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText firstname, lastname, email, password, conPassword, mobile, postcode, nhs_number, residential, dob;
+    private EditText fullName, email, password, conPassword, mobile, postcode, nhs_number, residential, dob;
     private ProgressBar progressBar;
     private RadioGroup registerGender;
     private RadioButton selectedGenderBtn;
@@ -61,12 +66,12 @@ public class RegisterActivity extends AppCompatActivity {
     private String countrySelected;
     private Spinner nationalityS;
     private ArrayAdapter<CharSequence> nationalityAdapter;
-    private ImageView imageViewUploadPic;
     private FirebaseAuth auth;
-    private StorageReference storageReference;
     private FirebaseUser firebaseUser;
+    private StorageReference storageReference;
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri imageUri;
+    ImageView selectImage;
 
 
     @Override
@@ -79,8 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         // Here we set up the login form
-        firstname = findViewById(R.id.firstname);
-        lastname = findViewById(R.id.lastname);
+        fullName = findViewById(R.id.full_name);
         email = findViewById(R.id.email_address);
         password = findViewById(R.id.choose_password);
         conPassword = findViewById(R.id.confirm_password);
@@ -90,42 +94,42 @@ public class RegisterActivity extends AppCompatActivity {
         residential = findViewById(R.id.residential_address);
         dob = findViewById(R.id.date_of_birth);
 
-        // Here we set up our image upload button and text
-        TextView selectImageTxt = findViewById(R.id.select_image_text);
-        Button uploadPicBtn = findViewById(R.id.upload_pic_button);
-        imageViewUploadPic = findViewById(R.id.profile_image_upload);
+        // Here we set up our image upload button
+        selectImage = findViewById(R.id.profile_image_upload);
+        Button uploadImageBtn = findViewById(R.id.select_image_button);
 
+        auth = FirebaseAuth.getInstance();
         firebaseUser = auth.getCurrentUser();
         firebaseUser = auth.getCurrentUser();
+
+
         storageReference = FirebaseStorage.getInstance().getReference("DisplayPics");
-        if(firebaseUser != null){
-            Log.d("Checking User","User Present");
-        }
-        else{
-            Log.d("Checking User","User Not Present");
-        }
 
         Uri uri = firebaseUser.getPhotoUrl();
 
         // Set User's current DP in ImageView (if image is already uploaded).
         // Will use Picasso to save and retrieve image file.
-        Picasso.get().load(uri).into(imageViewUploadPic);
+        Glide.with(RegisterActivity.this)
+                .load(uri)
+                .circleCrop()
+                .into(selectImage);
+
 
         // Select user profile image
-        selectImageTxt.setOnClickListener(new View.OnClickListener() {
+        selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 choosePicture();
             }
         });
 
-        // Upload image to firebase
-        uploadPicBtn.setOnClickListener(new View.OnClickListener() {
+        uploadImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadPicture();
+                uploadImage();
             }
         });
+
 
         // Spinner initialization
         nationalityS = findViewById(R.id.nationality);
@@ -188,8 +192,7 @@ public class RegisterActivity extends AppCompatActivity {
                 selectedGenderBtn = findViewById(selectedGenderId);
 
                 // Retrieve user input data into string variables
-                String firstnameTxt = firstname.getText().toString().trim();
-                String lastnameTxt = lastname.getText().toString().trim();
+                String fullNameTxt = fullName.getText().toString().trim();
                 String emailTxt = email.getText().toString().trim();
                 String passwordTxt = password.getText().toString().trim();
                 String conPasswordTxt = conPassword.getText().toString().trim();
@@ -200,16 +203,21 @@ public class RegisterActivity extends AppCompatActivity {
                 String txtDoB = dob.getText().toString().trim();
                 String txtGender; // Can't obtain value before verifying if any button was selected or not
                 progressBar = findViewById(R.id.progressBar);
+                String imageUri = selectImage.toString();
+
+                // Validate Mobile Number using matcher and pattern (Regular Expression)
+
+//                String mobileRegex = "^(\\+44\\s?\\d{10}|0044\\s?\\d{10}|0\\s?\\d{10})?$";
+//                Matcher mobileMatcher;
+//                Pattern mobilePattern = Pattern.compile(mobileRegex);
+//                mobileMatcher = mobilePattern.matcher(mobileTxt);
+
 
                 // checking if the user have filled all the required fields and in the correct manner
-                if (TextUtils.isEmpty(firstnameTxt)) {
-                    Toast.makeText(RegisterActivity.this, "Please enter firstname", Toast.LENGTH_SHORT).show();
-                    firstname.setError("Firstname is required");
-                    firstname.requestFocus();
-                } else if (TextUtils.isEmpty(lastnameTxt)) {
-                    Toast.makeText(RegisterActivity.this, "Please enter lastname", Toast.LENGTH_SHORT).show();
-                    lastname.setError("Lastname is required");
-                    lastname.requestFocus();
+                if (TextUtils.isEmpty(fullNameTxt)) {
+                    Toast.makeText(RegisterActivity.this, "Please enter full name", Toast.LENGTH_SHORT).show();
+                    fullName.setError("Full name is required");
+                    fullName.requestFocus();
                 } else if (TextUtils.isEmpty(emailTxt)) {
                     Toast.makeText(RegisterActivity.this, "Please enter email", Toast.LENGTH_SHORT).show();
                     email.setError("Email is required");
@@ -245,7 +253,11 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
                     mobile.setError("Mobile number should be 10 digits");
                     mobile.requestFocus();
-                } else if (TextUtils.isEmpty(postcodeTxt)) {
+                } /*else if (!mobileMatcher.find()){
+                    Toast.makeText(RegisterActivity.this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+                    mobile.setError("Mobile number is not valid");
+                    mobile.requestFocus();
+                }*/ else if (TextUtils.isEmpty(postcodeTxt)) {
                     Toast.makeText(RegisterActivity.this, "Please enter postcode", Toast.LENGTH_SHORT).show();
                     postcode.setError("Postcode is required");
                     postcode.requestFocus();
@@ -268,36 +280,20 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     txtGender = selectedGenderBtn.getText().toString();
                     progressBar.setVisibility(View.VISIBLE);
-                    registerUser(firstnameTxt, lastnameTxt, emailTxt, passwordTxt, mobileTxt, postcodeTxt, nhs_numberTxt, txtDoB, residentialTxt,
-                            txtGender);
+                    registerUser(fullNameTxt, emailTxt, passwordTxt, mobileTxt, postcodeTxt, nhs_numberTxt, txtDoB, residentialTxt,
+                            txtGender, imageUri);
                 }
             }
         });
-
     }
 
-    private void choosePicture() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            imageViewUploadPic.setImageURI(imageUri);
-        }
-    }
-
-    private void uploadPicture() {
-        final ProgressDialog pd = new ProgressDialog(this);
+    private void uploadImage() {
+        final ProgressDialog pd = new ProgressDialog(RegisterActivity.this);
         pd.setTitle("Uploading Image...");
         pd.show();
         if (imageUri != null) {
-            StorageReference fileReference = storageReference.child(auth.getCurrentUser().getUid() + "."
+
+            StorageReference fileReference = storageReference.child(Objects.requireNonNull(auth.getCurrentUser()).getUid() + "."
                     + getFileExtension(imageUri));
 
             // Upload image to storage
@@ -314,7 +310,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                     // Finally set the display image of the user after upload
                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                            .setPhotoUri(downloadUri).build();
+                                            .setPhotoUri(uri).build();
                                     firebaseUser.updateProfile(profileUpdates);
                                 }
                             });
@@ -334,58 +330,75 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
         }
-
-
     }
-    private String getFileExtension(Uri uri){
+
+    private void choosePicture () {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        //noinspection deprecation
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            Picasso.get().load(imageUri).into(selectImage);
+            //selectImage.setImageURI(imageUri);
+        }
+    }
+
+    // Register user using the credentials given
+    private void registerUser(String fullNameTxt, String emailTxt, String
+            passwordTxt, String mobileTxt, String postcodeTxt,
+                              String nhs_numberTxt, String txtDoB, String residentialTxt, String txtGender, String imageUri) {
+        auth.createUserWithEmailAndPassword(emailTxt, passwordTxt).addOnCompleteListener(RegisterActivity.this,
+                new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = auth.getCurrentUser();
+
+                            // Here we read and write user details in Firebase Realtime Database
+                            ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(fullNameTxt, emailTxt, mobileTxt,
+                                    postcodeTxt, nhs_numberTxt, residentialTxt, txtDoB, txtGender, countrySelected, imageUri);
+
+                            // Extracting and displaying user data reference from the Database for "Registered Users"
+                            DatabaseReference profileReference = FirebaseDatabase.getInstance().getReference("Registered Users");
+
+                            profileReference.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+                                        // Send Verification Email to user
+                                        firebaseUser.sendEmailVerification();
+
+                                        Toast.makeText(RegisterActivity.this, "User registered successfully. Please verify email", Toast.LENGTH_LONG).show();
+                                        // Open user profile after each successful registration
+                                        Intent intent = new Intent(RegisterActivity.this, UserActivity.class);
+
+                                        // To prevent user from returning to register activity on pressing back button after registration
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                                | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, "User registration failed. Please try again", Toast.LENGTH_LONG).show();
+                                    }
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            });
+                        }
+                    }
+                });
+    }
+    private String getFileExtension (Uri uri){
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
-
-        // Register user using the credentials given
-        private void registerUser (String firstnameTxt, String lastnameTxt, String emailTxt, String
-        passwordTxt, String mobileTxt, String postcodeTxt,
-                String nhs_numberTxt, String txtDoB, String residentialTxt, String txtGender){
-            auth.createUserWithEmailAndPassword(emailTxt, passwordTxt).addOnCompleteListener(RegisterActivity.this,
-                    new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser firebaseUser = auth.getCurrentUser();
-
-                                // Here we read and write user details in Firebase Realtime Database
-                                ReadWriteUserDetails writeUserDetails = new ReadWriteUserDetails(firstnameTxt, lastnameTxt, emailTxt, mobileTxt,
-                                        postcodeTxt, nhs_numberTxt, residentialTxt, txtDoB, txtGender, countrySelected, imageViewUploadPic);
-
-                                // Extracting and displaying user data reference from the Database for "Registered Users"
-                                DatabaseReference profileReference = FirebaseDatabase.getInstance().getReference("Registered Users");
-
-                                profileReference.child(firebaseUser.getUid()).setValue(writeUserDetails).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                        if (task.isSuccessful()) {
-                                            // Send Verification Email to user
-                                            firebaseUser.sendEmailVerification();
-
-                                            Toast.makeText(RegisterActivity.this, "User registered successfully. Please verify email", Toast.LENGTH_LONG).show();
-                                            // Open user profile after each successful registration
-                                            Intent intent = new Intent(RegisterActivity.this, UserActivity.class);
-
-                                            // To prevent user from returning to register activity on pressing back button after registration
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(intent);
-                                            finish();
-                                        } else {
-                                            Toast.makeText(RegisterActivity.this, "User registration failed. Please try again", Toast.LENGTH_LONG).show();
-                                        }
-                                        progressBar.setVisibility(View.GONE);
-                                    }
-                                });
-                            }
-                        }
-                    });
-        }
 }
+

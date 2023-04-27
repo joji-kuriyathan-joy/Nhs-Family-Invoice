@@ -40,11 +40,35 @@
     <string name="submit_txt">Submit</string>
     <string name="survey_demo">survey</string>
     <string name="responses_txt">Responses</string>
+    <string name="full_name">FullName</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="update_email">Update Email</string>
+    <string name="upload_profile_pic">Upload profile pic</string>
+    <string name="enter_residential_address">Enter residential address</string>
+    <string name="update_residential_address">Residential Address:</string>
+    <string name="select_your_country">Select your country</string>
+    <string name="country_txt">Country:</string>
+    <string name="male_txt">Male</string>
+    <string name="female_txt">Female</string>
+    <string name="update_gender_txt">Gender:</string>
+    <string name="select_your_date_of_birth">Select your date of birth</string>
+    <string name="date_of_birth_dd_mm_yyyy">Date of Birth (dd/mm/yyyy):</string>
+    <string name="enter_nhs_number">Enter NHS number</string>
+    <string name="update_nhs_number">NHS Number:</string>
+    <string name="enter_postcode">Enter postcode</string>
+    <string name="update_postcode">Postcode:</string>
+    <string name="update_enter_mobile">Enter mobile</string>
+    <string name="update_mobile">Mobile:</string>
+    <string name="enter_full_name">Enter full name</string>
+    <string name="update_fullname">FullName:</string>
+    <string name="please_update_your_profile_here">Please update your profile here.</string>
+    <string name="select_image">Select image</string>
+    <string name="choose_image">choose image</string>
+    <string name="chose_image">Select Image</string>
     <string name="response_day_txt">Mon</string>
     <string name="response_date_txt">15</string>
     <string name="response_month_txt">Jan</string>
-
-
+    <string name="response_summary_question_txt">1</string>
 
 
 </resources>

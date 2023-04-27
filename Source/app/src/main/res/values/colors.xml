@@ -11,5 +11,6 @@
     <color name="responseLLbg">#5EADEC</color>
     <color name="responseday_monthbg">#2979FF</color>
     <color name="responsedatebg">#5292FD</color>
-
+    <color name="light_green">#B7F570</color>
+    <color name="red">#F44336</color>
 </resources>

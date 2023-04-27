@@ -33,7 +33,8 @@ import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import uk.ac.tees.nhsdemo.model.SurveyData;
+import uk.ac.tees.nhsdemo.Models.SurveyData;
+
 
 public class SurveyActivity extends AppCompatActivity {
     private FirebaseAuth authProfile;
@@ -264,27 +265,27 @@ public class SurveyActivity extends AppCompatActivity {
 
                     mDatabaseUserResponseRef.child(firebaseUser.getUid()).child(currentDateAndTimeStr)
                             .setValue(surveyData).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(SurveyActivity.this,
-                                    "Survey successfully completed!", Toast.LENGTH_LONG).show();
-                            // Open user profile after each successful registration
-                            Intent intent = new Intent(SurveyActivity.this, ResponseActivity.class);
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(SurveyActivity.this,
+                                            "Survey successfully completed!", Toast.LENGTH_LONG).show();
+                                    // Open user profile after each successful registration
+                                    Intent intent = new Intent(SurveyActivity.this, ResponseActivity.class);
 
-                            // To prevent user from returning to register activity on pressing back button after registration
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(SurveyActivity.this,
-                                    "Something went wrong while submitting the survey. Please try again.", Toast.LENGTH_LONG).show();
+                                    // To prevent user from returning to register activity on pressing back button after registration
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SurveyActivity.this,
+                                            "Something went wrong while submitting the survey. Please try again.", Toast.LENGTH_LONG).show();
 
-                        }
-                    });
+                                }
+                            });
 
                 } else {
                     Toast.makeText(SurveyActivity.this, "Please choose any one response for this question.", Toast.LENGTH_LONG).show();

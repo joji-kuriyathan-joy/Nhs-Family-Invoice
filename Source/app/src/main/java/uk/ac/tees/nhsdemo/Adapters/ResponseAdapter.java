@@ -1,4 +1,4 @@
-package uk.ac.tees.nhsdemo.adapters;
+package uk.ac.tees.nhsdemo.Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,21 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Collections;
 import java.util.List;
 
+import uk.ac.tees.nhsdemo.Models.ResponseCardData;
 import uk.ac.tees.nhsdemo.R;
 import uk.ac.tees.nhsdemo.ResponseCardViewHolder;
-import uk.ac.tees.nhsdemo.model.ResponseCardData;
-import uk.ac.tees.nhsdemo.utils.ResponseClickListener;
+import uk.ac.tees.nhsdemo.Utils.ResponseClickListener;
 
 public class ResponseAdapter extends RecyclerView.Adapter<ResponseCardViewHolder> {
     List<ResponseCardData> responseCardDataList = Collections.emptyList();
 
     Context context;
-    ResponseClickListener listiner;
+    ResponseClickListener listener;
 
-    public ResponseAdapter(List<ResponseCardData> responseCardDataList, Context context, ResponseClickListener listiner) {
+    public ResponseAdapter(List<ResponseCardData> responseCardDataList, Context context, ResponseClickListener listener) {
         this.responseCardDataList = responseCardDataList;
         this.context = context;
-        this.listiner = listiner;
+        this.listener = listener;
     }
 
     @NonNull
@@ -56,7 +56,7 @@ public class ResponseAdapter extends RecyclerView.Adapter<ResponseCardViewHolder
         holder.responseCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listiner.click(v, index);
+                listener.click(v, index);
             }
         });
 

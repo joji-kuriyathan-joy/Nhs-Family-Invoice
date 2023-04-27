@@ -1,20 +1,21 @@
 package uk.ac.tees.nhsdemo;
 
 
+import android.net.Uri;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ReadWriteUserDetails {
-    public String firstname, lastname, email, mobile, postcode, nhs_number, resi_address, doB, gender, countrySelected;
-    public ImageView userProfileImage;
+    public String fullName, email, mobile, postcode, nhs_number, resi_address, doB, gender, countrySelected, imageUri;
+
 
 
     public ReadWriteUserDetails(){
 
     }
-    public ReadWriteUserDetails(String firstnameTxt, String lastnameTxt, String emailTxt, String mobileTxt,
-                                String postcodeTxt, String nhs_numberTxt, String resi_addressTxt, String txtDoB, String txtGender, String countrySelected, ImageView userProfileImage){
-        this.firstname = firstnameTxt;
-        this.lastname = lastnameTxt;
+    public ReadWriteUserDetails(String fullNameTxt, String emailTxt, String mobileTxt,
+                                String postcodeTxt, String nhs_numberTxt, String resi_addressTxt, String txtDoB, String txtGender, String countrySelected, String imageUri){
+        this.fullName = fullNameTxt;
         this.email = emailTxt;
         this.mobile = mobileTxt;
         this.postcode = postcodeTxt;
@@ -23,8 +24,11 @@ public class ReadWriteUserDetails {
         this.doB = txtDoB;
         this.gender = txtGender;
         this.countrySelected = countrySelected;
-        this.userProfileImage = userProfileImage;
+        this.imageUri = imageUri;
 
 
+    }
+
+    public ReadWriteUserDetails(String gender, String mobile, String postcode, String nhs_number, String residential_address, String dob, TextView countrySelected) {
     }
 }

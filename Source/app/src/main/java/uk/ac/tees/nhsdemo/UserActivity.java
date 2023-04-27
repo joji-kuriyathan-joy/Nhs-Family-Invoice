@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,11 +30,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class UserActivity extends AppCompatActivity {
-    private TextView  txt_welcome, firstnameTxt, emailTxt, mobileTxt, postcodeTxt, nhs_numberTxt, residentialTxt, txtDoB, txtGender, countrySelected;
-    private String firstname,  email_address, mobile, postcode, nhs_number, residential_address, dob, gender, nationalityS;
+    private TextView  txt_welcome, fullNameTxt, emailTxt, mobileTxt, postcodeTxt, nhs_numberTxt, residentialTxt, txtDoB, txtGender, countrySelected;
+    private String fullName,  email_address, mobile, postcode, nhs_number, residential_address, dob, gender, nationalityS;
     private ProgressBar userProgressBar;
     private FirebaseAuth authProfile;
-    private ImageView userProfileImage;
+    private ImageView selectImage;
+
+    BottomNavigationView navigationView;
+
 
 
     @Override
@@ -41,7 +48,7 @@ public class UserActivity extends AppCompatActivity {
 //        getSupportActionBar().setTitle("Profile");
 
         txt_welcome = findViewById(R.id.show_welcome_msg);
-        firstnameTxt = findViewById(R.id.show_full_name);
+        fullNameTxt = findViewById(R.id.show_full_name);
         emailTxt = findViewById(R.id.show_email);
         mobileTxt = findViewById(R.id.show_mobile);
         postcodeTxt = findViewById(R.id.show_postcode);
@@ -50,10 +57,33 @@ public class UserActivity extends AppCompatActivity {
         txtDoB = findViewById(R.id.show_DoB);
         txtGender = findViewById(R.id.show_sex);
         countrySelected = findViewById(R.id.show_nationality);
-        userProfileImage = findViewById(R.id.user_profile_image);
+        selectImage = findViewById(R.id.user_profile_image);
 
         authProfile = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = authProfile.getCurrentUser();
+
+        navigationView = findViewById(R.id.bottomNavigationView);
+
+        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.app_user:
+                        startActivity(new Intent(UserActivity.this, UserActivity.class));
+                        break;
+                    case R.id.survey_icon:
+                        startActivity(new Intent(UserActivity.this, SurveyActivity.class));
+                        break;
+                    case R.id.response_icon:
+                        startActivity(new Intent(UserActivity.this, ResponseActivity.class));
+                        break;
+
+                    default:
+                }
+
+                return true;
+            }
+        });
 
         if (firebaseUser == null){
             Toast.makeText(UserActivity.this, "Something went wrong, user profile not available", Toast.LENGTH_SHORT).show();
@@ -64,9 +94,6 @@ public class UserActivity extends AppCompatActivity {
 //            userProgressBar.setVisibility(View.GONE);
             showUserProfile(firebaseUser);
         }
-
-
-
     }
 
     // User in UserActivity after successful registration
@@ -108,7 +135,7 @@ public class UserActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ReadWriteUserDetails readWriteUserDetails = snapshot.getValue(ReadWriteUserDetails.class);
                 if (readWriteUserDetails != null){
-                    firstname = readWriteUserDetails.firstname;
+                    fullName = readWriteUserDetails.fullName;
                     email_address = firebaseUser.getEmail();
                     mobile = readWriteUserDetails.mobile;
                     postcode = readWriteUserDetails.postcode;
@@ -119,10 +146,9 @@ public class UserActivity extends AppCompatActivity {
                     nationalityS = readWriteUserDetails.countrySelected;
 
 
-
                     // Here we set the extracted data from the DataBase on the user ui
-                    txt_welcome.setText("Welcome, " + firstname + "!");
-                    firstnameTxt.setText(firstname);
+                    txt_welcome.setText("Welcome, " + fullName + "!");
+                    fullNameTxt.setText(fullName);
                     emailTxt.setText(email_address);
                     mobileTxt.setText(mobile);
                     postcodeTxt.setText(postcode);
@@ -135,7 +161,7 @@ public class UserActivity extends AppCompatActivity {
                     // Set user DP after upload
                     Uri uri = firebaseUser.getPhotoUrl();
 
-                    Picasso.get().load(uri).into(userProfileImage);
+                    Glide.with(UserActivity.this).load(uri).into(selectImage);
                 }else{
                     Toast.makeText(UserActivity.this, "Something went wrong!", Toast.LENGTH_LONG).show();
                 }
@@ -167,10 +193,10 @@ public class UserActivity extends AppCompatActivity {
         if (id == R. id.menu_profile){
             Intent intent = new Intent(UserActivity.this, UserActivity.class);
             startActivity(intent);
-        } /*else if(id == R.id.menu_update_profile){
-            Intent intent = new Intent(UserActivity.this, UpdateProfile.class);
+        } else if(id == R.id.menu_update_profile){
+            Intent intent = new Intent(UserActivity.this, UpdateProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.menu_update_email){
+        } /*else if (id == R.id.menu_update_email){
             Intent intent = new Intent(UserActivity.this, UpdateEmail.class);
             startActivity(intent);
         } else if (id == R.id.change_password){

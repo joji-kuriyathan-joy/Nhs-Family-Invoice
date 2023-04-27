@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/user"
+        android:title="Profile"
+        android:icon="@drawable/user"
+        android:iconTint="@color/black"/>
+    <item
+        android:id="@+id/survey"
+        android:title="Survey"
+        android:icon="@drawable/survey"
+        android:iconTint="@color/black"/>
+    <item
+        android:id="@+id/responses"
+        android:title="Responses"
+        android:icon="@drawable/responses"
+        android:iconTint="@color/black"/>
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/settings"
+        android:iconTint="@color/black"/>
+</menu>

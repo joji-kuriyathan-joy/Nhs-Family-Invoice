@@ -108,7 +108,7 @@
                 android:drawableTint="@color/black"
                 android:hint="@string/password_button"
                 android:importantForAutofill="no"
-                android:inputType="numberPassword"
+                android:inputType="textPassword"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp" />
 

@@ -1,4 +1,4 @@
-package uk.ac.tees.nhsdemo.model;
+package uk.ac.tees.nhsdemo.Models;
 
 import java.util.HashMap;
 

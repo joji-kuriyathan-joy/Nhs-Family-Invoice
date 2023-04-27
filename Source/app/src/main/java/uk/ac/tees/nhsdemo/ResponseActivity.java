@@ -26,9 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import uk.ac.tees.nhsdemo.adapters.ResponseAdapter;
-import uk.ac.tees.nhsdemo.model.ResponseCardData;
-import uk.ac.tees.nhsdemo.utils.ResponseClickListener;
+import uk.ac.tees.nhsdemo.Adapters.ResponseAdapter;
+import uk.ac.tees.nhsdemo.Models.ResponseCardData;
+import uk.ac.tees.nhsdemo.Utils.ResponseClickListener;
 
 public class ResponseActivity extends AppCompatActivity implements NavigationView
         .OnNavigationItemSelectedListener {

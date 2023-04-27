@@ -1,4 +1,4 @@
-package uk.ac.tees.nhsdemo.model;
+package uk.ac.tees.nhsdemo.Models;
 
 public class ResponseCardData {
     public String dayOfTheWeek, day,month,year,time,createdBy, createdDateTimeKey;

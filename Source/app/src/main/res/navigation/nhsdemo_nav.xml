@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nhsdemo_nav"
+    app:startDestination="@id/UserActivity">
+
+    <activity
+        android:id="@+id/UserActivity"
+        android:name="uk.ac.tees.nhsdemo.UserActivity"
+        android:label="activity_user"
+        tools:layout="@layout/activity_user" >
+        <action
+            android:id="@+id/action_UserActivity_to_SurveyActivity"
+            app:destination="@id/SurveyActivity" />
+        <action
+            android:id="@+id/action_UserActivity_to_ResponseActivity"
+            app:destination="@id/ResponseActivity" />
+    </activity>
+    <activity
+        android:id="@+id/SurveyActivity"
+        android:name="uk.ac.tees.nhsdemo.SurveyActivity"
+        android:label="survey_activity"
+        tools:layout="@layout/activity_survey" >
+        <action
+            android:id="@+id/action_SurveyActivity_to_UserActivity"
+            app:destination="@id/UserActivity" />
+    </activity>
+    <activity
+        android:id="@+id/ResponseActivity"
+        android:name="uk.ac.tees.nhsdemo.ResponseActivity"
+        android:label="activity_response"
+        tools:layout="@layout/activity_response" >
+        <action
+            android:id="@+id/action_ResponseActivity_to_UserActivity"
+            app:destination="@id/UserActivity" />
+    </activity>
+
+</navigation>

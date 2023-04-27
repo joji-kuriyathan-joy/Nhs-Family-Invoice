@@ -44,5 +44,4 @@
         android:layout_marginTop="10dp"
         android:nestedScrollingEnabled="true"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
 </RelativeLayout>

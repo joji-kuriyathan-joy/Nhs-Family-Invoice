@@ -1,4 +1,5 @@
-package uk.ac.tees.nhsdemo.utils;
+package uk.ac.tees.nhsdemo.Utils;
+
 
 import android.util.Log;
 import android.view.View;
@@ -15,4 +16,5 @@ public class ResponseClickListener {
         Log.d("ResponseClickListener", "Response " +index + " clicked.");
     }
 }
+
 

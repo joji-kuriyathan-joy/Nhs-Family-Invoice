@@ -24,10 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
-import java.util.regex.Pattern;
-
 public class LoginActivity extends AppCompatActivity {
-    // iniializing all variables locally so they could be used in other methods
+    // initializing all variables locally so they could be used in other methods
     private EditText email;
     private EditText password;
     private Button loginBtn;
@@ -90,10 +88,8 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final String emailTxt = email.getText().toString().trim();
                 final String passwordTxt = password.getText().toString().trim();
-
 
                 if (emailTxt.isEmpty() || passwordTxt.isEmpty()){
                     Toast.makeText(LoginActivity.this, "Empty Credentials", Toast.LENGTH_SHORT).show();
@@ -125,10 +121,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-
-                    //ByPassing this activity to Survey Activity
-                    startActivity(new Intent(LoginActivity.this, SurveyActivity.class));
-                    //startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                    startActivity(new Intent(LoginActivity.this, UserActivity.class));
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                 } else {
@@ -149,4 +142,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }

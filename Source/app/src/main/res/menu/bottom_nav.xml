@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/app_user"
+        android:title="User"
+        android:icon="@drawable/icons_user" />
+    <item android:id="@+id/survey_icon"
+        android:title="Survey"
+        android:icon="@drawable/customer_survey_icon" />
+    <item android:id="@+id/response_icon"
+        android:title="Responses"
+        android:icon="@drawable/icons_response" />
+    <item android:id="@+id/settings_icon"
+        android:title="Settings"
+        android:icon="@drawable/settings7" />
+</menu>

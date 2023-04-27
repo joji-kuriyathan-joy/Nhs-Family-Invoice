@@ -24,14 +24,14 @@
         android:id="@+id/survey_logo"
         android:layout_width="57dp"
         android:layout_height="50dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toTopOf="@+id/header_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toEndOf="@+id/header_title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/new_logo"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/new_logo" />
 
     <TextView
         android:id="@+id/header_sub_txt"
@@ -49,23 +49,23 @@
         android:id="@+id/divider"
         android:layout_width="409dp"
         android:layout_height="4dp"
-        android:background="@color/black"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="88dp"
         android:layout_marginTop="4dp"
+        android:background="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_sub_txt"/>
+        app:layout_constraintTop_toBottomOf="@id/header_sub_txt"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="88dp" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView5"
+        android:id="@+id/question_cardView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="55dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="20dp"
+        android:layout_height="150dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="55dp"
         android:layout_marginEnd="20dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="10dp"
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -75,13 +75,13 @@
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
             android:text="@string/question_1"
-            android:textStyle="bold"
             android:textAlignment="center"
-            android:textSize="20sp"
-            android:padding="20dp"
-            android:layout_marginTop="60dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
 
@@ -89,14 +89,15 @@
         android:id="@+id/number_cardView"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="117dp"
+        android:background="@drawable/answer_button"
         android:elevation="25dp"
         app:cardCornerRadius="50dp"
-        android:background="@drawable/answer_button"
-        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        app:layout_constraintBottom_toTopOf="@+id/question_cardView"
         app:layout_constraintEnd_toStartOf="@+id/emoji_cardView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardView5"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7">
 
         <TextView
@@ -106,9 +107,9 @@
             android:text="@string/number_txt"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="-29dp"
+            tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
     </androidx.cardview.widget.CardView>
 
@@ -116,11 +117,12 @@
         android:id="@+id/emoji_cardView"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginTop="107dp"
         android:elevation="25dp"
         app:cardCornerRadius="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        app:layout_constraintBottom_toTopOf="@+id/question_cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardView5"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.642">
 
     </androidx.cardview.widget.CardView>
@@ -132,9 +134,10 @@
         android:layout_marginTop="18dp"
         android:background="@drawable/answer_button"
         android:text="@string/answer_1"
+        android:textAllCaps="false"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@+id/cardView5"
-        app:layout_constraintTop_toBottomOf="@+id/cardView5" />
+        app:layout_constraintStart_toStartOf="@+id/question_cardView"
+        app:layout_constraintTop_toBottomOf="@+id/question_cardView" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/answer2_btn"
@@ -143,11 +146,12 @@
         android:layout_marginTop="18dp"
         android:background="@drawable/answer_button"
         android:text="@string/answer_2"
+        android:textAllCaps="false"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/cardView5"
+        app:layout_constraintEnd_toEndOf="@+id/question_cardView"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/answer1_btn"
-        app:layout_constraintTop_toBottomOf="@id/cardView5" />
+        app:layout_constraintTop_toBottomOf="@id/question_cardView" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/answer3_btn"
@@ -156,6 +160,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/answer_button"
         android:text="@string/answer_3"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/answer1_btn"
         app:layout_constraintHorizontal_bias="0.0"
@@ -169,6 +174,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/answer_button"
         android:text="@string/answer_4"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/answer2_btn"
         app:layout_constraintHorizontal_bias="0.0"
@@ -182,6 +188,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/answer_button"
         android:text="@string/answer_5"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/answer3_btn"
         app:layout_constraintHorizontal_bias="0.0"
@@ -206,7 +213,7 @@
             android:layout_height="wrap_content"
             android:text="@string/next_txt"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.298"
@@ -244,8 +251,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/previous_txt"
+            android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.777"
@@ -256,7 +264,7 @@
             android:id="@+id/left_arrow"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="108dp"
+            android:layout_marginEnd="104dp"
             android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -275,6 +283,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/button_background"
         android:text="@string/submit_txt"
+        android:textAllCaps="false"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="25dp"
@@ -283,5 +292,6 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/prev_constraintLayout"
         app:layout_constraintTop_toBottomOf="@+id/next_constraintLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

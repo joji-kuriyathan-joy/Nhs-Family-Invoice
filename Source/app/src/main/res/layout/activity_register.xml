@@ -21,30 +21,30 @@
         android:visibility="gone" />
 
     <EditText
-        android:id="@+id/firstname"
+        android:id="@+id/full_name"
         android:layout_width="230dp"
         android:layout_height="36dp"
         android:layout_marginTop="56dp"
         android:background="@drawable/edit_text_background"
-        android:hint="@string/firstname_text"
+        android:hint="@string/full_name"
         android:paddingStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/lastname"
-        android:layout_width="230dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edit_text_background"
-        android:hint="@string/lastname_text"
-        android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/firstname"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/firstname"
-        app:layout_constraintTop_toBottomOf="@+id/firstname" />
+<!--    <EditText-->
+<!--        android:id="@+id/lastname"-->
+<!--        android:layout_width="230dp"-->
+<!--        android:layout_height="36dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@drawable/edit_text_background"-->
+<!--        android:hint="@string/lastname_text"-->
+<!--        android:paddingStart="10dp"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/firstname"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/firstname"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/firstname" />-->
 
     <EditText
         android:id="@+id/email_address"
@@ -54,10 +54,10 @@
         android:background="@drawable/edit_text_background"
         android:hint="@string/email_address_text"
         android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/lastname"
+        app:layout_constraintEnd_toEndOf="@+id/full_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/lastname"
-        app:layout_constraintTop_toBottomOf="@+id/lastname" />
+        app:layout_constraintStart_toStartOf="@+id/full_name"
+        app:layout_constraintTop_toBottomOf="@+id/full_name" />
 
     <EditText
         android:id="@+id/choose_password"
@@ -190,39 +190,27 @@
         android:id="@+id/profile_image_upload"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:src="@drawable/no_profile_pic"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toEndOf="@+id/firstname"
+        app:layout_constraintStart_toEndOf="@+id/full_name"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/select_image_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/select_image_txt"
-        android:textColor="@color/nhs_color"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="@+id/profile_image_upload"
-        app:layout_constraintStart_toStartOf="@+id/profile_image_upload"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image_upload" />
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/upload_pic_button"
+        android:id="@+id/select_image_button"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:background="@drawable/button_background"
-        android:text="@string/upload_picture_txt"
+        android:text="@string/select_image"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/date_of_birth"
         app:layout_constraintEnd_toEndOf="@+id/profile_image_upload"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/profile_image_upload"
-        app:layout_constraintTop_toBottomOf="@+id/select_image_text"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_image_upload"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerButton"
@@ -253,10 +241,10 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/firstname"
-        app:layout_constraintEnd_toEndOf="@+id/firstname"
+        app:layout_constraintBottom_toTopOf="@+id/full_name"
+        app:layout_constraintEnd_toEndOf="@+id/full_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/firstname" />
+        app:layout_constraintStart_toStartOf="@+id/full_name" />
 
     <ImageView
         android:id="@+id/imageView4"
