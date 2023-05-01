@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email;
     private EditText password;
     private Button loginBtn;
-    private TextView register, forgotPassword, survey;
+    private TextView register, forgotPassword;
     private ProgressBar loginProgressBar;
     private FirebaseAuth auth;
     private static final String TAG = "LoginActivity";
@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
         register = findViewById(R.id.register_text);
         forgotPassword = findViewById(R.id.forget_password);
         loginProgressBar = findViewById(R.id.loginProgressBar);
-        survey = findViewById(R.id.survey_demo);
 
         // set onClickListener for the forgot password text
         forgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "You can reset your password now!", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LoginActivity.this, ForgotPassword.class));
-            }
-        });
-
-        // This is just a demo to check survey ui
-        survey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SurveyActivity.class));
             }
         });
 
@@ -121,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(LoginActivity.this, UserActivity.class));
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                 } else {

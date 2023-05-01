@@ -1,6 +1,5 @@
 package uk.ac.tees.nhsdemo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -293,14 +292,27 @@ public class SurveyFragment extends Fragment {
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(SurveyFragment.this.getContext(),
                                             "Survey successfully completed!", Toast.LENGTH_LONG).show();
-                                    // Open user profile after each successful registration
-                                    Intent intent = new Intent(SurveyFragment.this.getContext(), ResponseActivity.class);
 
-                                    // To prevent user from returning to register activity on pressing back button after registration
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                            | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    getActivity().finish();
+                                    //01-May-2023
+                                    //-------- Commented before it was redirecting to ResponseActivity.
+
+                                    // Open user profile after each successful registration
+//                                    Intent intent = new Intent(SurveyFragment.this.getContext(), ResponseActivity.class);
+//
+//                                    // To prevent user from returning to register activity on pressing back button after registration
+//                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(intent);
+//                                    getActivity().finish();
+//
+                                    //-- Redirecting to ResponsesFragment
+                                    ResponsesFragment responsesFragment = new ResponsesFragment();
+                                    getActivity().getSupportFragmentManager().beginTransaction()
+                                            .replace(((ViewGroup)getView().getParent()).getId(), responsesFragment, "findThisFragment")
+                                    .addToBackStack(null)
+                                    .commit();
+
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override

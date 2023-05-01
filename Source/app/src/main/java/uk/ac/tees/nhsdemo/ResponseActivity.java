@@ -1,16 +1,16 @@
 package uk.ac.tees.nhsdemo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +50,7 @@ public class ResponseActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response);
-
+        Log.d("ResponseActivity","INSIDE RESPONSE ACTIVITY");
         //get the responses for the current logged in user from the database
         //get the current logged in user
         authProfile = FirebaseAuth.getInstance();
@@ -86,8 +86,7 @@ public class ResponseActivity extends AppCompatActivity implements NavigationVie
 
                             responseTime_TextView = (TextView) v.findViewById(R.id.responseTime_txtview);
                             createdDateTimeKeyStr = (String) responseTime_TextView.getTag();
-                            Toast.makeText(ResponseActivity.this, "clicked item index is "
-                                    + index + "-- And Id :" + createdDateTimeKeyStr, Toast.LENGTH_LONG).show();
+
                         }
 
                         // -------- View Survey ActionButton START--------

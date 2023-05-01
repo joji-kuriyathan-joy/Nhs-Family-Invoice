@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/action_bar"
+        android:id="@+id/action_bar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -44,21 +44,21 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/divider"
+        android:id="@+id/divider1"
         android:layout_width="409dp"
         android:layout_height="4dp"
         android:background="@color/black"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="88dp"
-        android:layout_below="@id/action_bar"/>
+        android:layout_below="@id/action_bar1"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/responseSummaryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/divider"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/divider1"
         android:nestedScrollingEnabled="true"
-        android:visibility="visible"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-</RelativeLayout>
+
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+   </RelativeLayout>

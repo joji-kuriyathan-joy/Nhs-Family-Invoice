@@ -14,17 +14,15 @@ import java.util.List;
 import uk.ac.tees.nhsdemo.Models.ResponseSummaryCardData;
 import uk.ac.tees.nhsdemo.R;
 import uk.ac.tees.nhsdemo.ResponseSummaryCardViewHolder;
-import uk.ac.tees.nhsdemo.Utils.ResponseClickListener;
 
 public class ResponseSummaryAdapter extends RecyclerView.Adapter<ResponseSummaryCardViewHolder>{
     List<ResponseSummaryCardData> responseSummaryCardDataList = Collections.emptyList();
     Context context;
-    ResponseClickListener listener;
+//    ResponseClickListener listener;
 
-    public ResponseSummaryAdapter(List<ResponseSummaryCardData> responseSummaryCardDataList, Context context, ResponseClickListener listener) {
+    public ResponseSummaryAdapter(List<ResponseSummaryCardData> responseSummaryCardDataList, Context context) {
         this.responseSummaryCardDataList = responseSummaryCardDataList;
         this.context = context;
-        this.listener = listener;
     }
 
     @NonNull
@@ -52,6 +50,6 @@ public class ResponseSummaryAdapter extends RecyclerView.Adapter<ResponseSummary
 
     @Override
     public int getItemCount() {
-        return 0;
+        return responseSummaryCardDataList.size();
     }
 }

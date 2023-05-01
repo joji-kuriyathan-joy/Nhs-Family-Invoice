@@ -176,47 +176,47 @@ public class UserActivity extends AppCompatActivity {
     }
 
     // Creating ActionBar menu
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate menu items
-        getMenuInflater().inflate(R.menu.common_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    // When any menu item is selected
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R. id.menu_profile){
-            Intent intent = new Intent(UserActivity.this, UserActivity.class);
-            startActivity(intent);
-        } else if(id == R.id.menu_update_profile){
-            Intent intent = new Intent(UserActivity.this, UpdateProfileActivity.class);
-            startActivity(intent);
-        } /*else if (id == R.id.menu_update_email){
-            Intent intent = new Intent(UserActivity.this, UpdateEmail.class);
-            startActivity(intent);
-        } else if (id == R.id.change_password){
-            Intent intent = new Intent(UserActivity.this, ChangePassword.class);
-            startActivity(intent);
-        } else if (id == R.id.delete_profile){
-            Intent intent = new Intent(UserActivity.this, DeleteProfile.class);
-            startActivity(intent);
-        } */else if (id == R.id.menu_logout){
-            authProfile.signOut();
-            Toast.makeText(UserActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(UserActivity.this, LoginActivity.class);
-
-            // Clear stack to prevent user from going back into UserActivity after logging out
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish(); // Close UserActivity
-        } else {
-            Toast.makeText(UserActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate menu items
+//        getMenuInflater().inflate(R.menu.common_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    // When any menu item is selected
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R. id.menu_profile){
+//            Intent intent = new Intent(UserActivity.this, UserActivity.class);
+//            startActivity(intent);
+//        } else if(id == R.id.menu_update_profile){
+//            Intent intent = new Intent(UserActivity.this, UpdateProfileActivity.class);
+//            startActivity(intent);
+//        } /*else if (id == R.id.menu_update_email){
+//            Intent intent = new Intent(UserActivity.this, UpdateEmail.class);
+//            startActivity(intent);
+//        } else if (id == R.id.change_password){
+//            Intent intent = new Intent(UserActivity.this, ChangePassword.class);
+//            startActivity(intent);
+//        } else if (id == R.id.delete_profile){
+//            Intent intent = new Intent(UserActivity.this, DeleteProfile.class);
+//            startActivity(intent);
+//        } */else if (id == R.id.menu_logout){
+//            authProfile.signOut();
+//            Toast.makeText(UserActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(UserActivity.this, LoginActivity.class);
+//
+//            // Clear stack to prevent user from going back into UserActivity after logging out
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//            finish(); // Close UserActivity
+//        } else {
+//            Toast.makeText(UserActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
